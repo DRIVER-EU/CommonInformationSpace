@@ -1,0 +1,1 @@
+"%JAVA_HOME%bin\java" -jar CISCoreStandalone-2.0.jar

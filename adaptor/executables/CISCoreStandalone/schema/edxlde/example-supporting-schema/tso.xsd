@@ -1,0 +1,1563 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Copyright: this document is the property of CEN/WS-ISDEM worksop. Its 
+	utilisation should clearly mention its CEN/WS-ISDEM source. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://tacticalsituationobject.org/schemas/TSO/2_0"
+	targetNamespace="http://tacticalsituationobject.org/schemas/TSO/2_0"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	version="2_0">
+	<xs:element name="TSO_2_0" type="TSO_2_0type">
+		<xs:annotation>
+			<xs:documentation>This schema describes the contents of the Tactical
+				Situation Object proposed by the CEN/WS-ISDEM workshop. The goal of
+				the TSO
+				is to allow different agencies to exchange tactical information during
+				an
+				emergency, so that each involved responder has a good and common knowledge
+				of the status of the operations.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="TSO_2_0type">
+		<xs:annotation>
+			<xs:documentation>--- Modified in V1.1: new --- Updated for version
+				1.2, 1.3, 1.3a, 1.4, 2.0 ---
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="CONTEXT" />
+			<xs:element ref="EVENT" />
+			<xs:element ref="RESOURCE" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element ref="MISSION" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CONTEXT">
+		<xs:annotation>
+			<xs:documentation>This part of the TSO identifies the context of each
+				instance of a TSO
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ID" nillable="false">
+					<xs:annotation>
+						<xs:documentation>The identifier of the TSO which shall be
+							unique over the context in which the TSO is used. (Name of the element
+							has
+							been changed in version 1.2)
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="40" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="MODE">
+					<xs:annotation>
+						<xs:documentation>It defines if the TSO is related to an actual
+							event (ACTUAL value), an exercise (EXERCS value) or a test
+							(SYSTEM value
+							for messages that support alert network internal functions or TEST,
+							for
+							technical testing only, all recipients disregard).
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="ACTUAL" />
+							<xs:enumeration value="EXERCS" />
+							<xs:enumeration value="SYSTEM" />
+							<xs:enumeration value="TEST" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="MSGTYPE">
+					<xs:annotation>
+						<xs:documentation>The code denoting the nature of the alert
+							message. This element is mandatory. The possible values are: ACK
+							=
+							Acknowledges receipt and acceptance of the message(s)) identified in
+							reference, ALERT = Initial information requiring attention by
+							targeted
+							recipients, CANCEL = Cancels the earlier message(s) identified in
+							reference, ERROR = indicates rejection of the message(s) identified in
+							reference, UPDATE = Updates and supersedes the earlier message(s)
+							identified in reference.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="ALERT" />
+							<xs:enumeration value="UPDATE" />
+							<xs:enumeration value="CANCEL" />
+							<xs:enumeration value="ACK" />
+							<xs:enumeration value="ERROR" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="CREATION" type="xs:dateTime" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>--- Modified in version 1.2 --- The date and
+							time when the TSO was created. This is the date and time of the
+							sender
+							computer and receivers may not assume that this date and time is
+							accurate.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="LINK" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>--- Modified in V1.2: multiple links are now
+							allowed, and an optional ROLE element has been added.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ID">
+								<xs:annotation>
+									<xs:documentation>The identifier (ID) of another TSO to
+										which this TSO is related.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="40" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="ROLE" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>--- New in version 1.2 --- Defines the
+										relation of the linked TSO through the data dictionary.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="6" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="LEVEL" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>It provides the level of the organisation
+							which provides the TSO (STRTGC = strategic, OPR = operational, TACTCL
+							=
+							tactical)
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="OPR" />
+							<xs:enumeration value="STRTGC" />
+							<xs:enumeration value="TACTCL" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="SECLASS" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>--- Changed in version 1.4: name is changed,
+							UNMARK value is added --- It provides the confidentiality level
+							of the TSO
+							(CONFID = confidential, RESTRC = restricted, SECRET = secret, TOPSRT =
+							top
+							secret, UNCLAS = unclassified)
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="CONFID" />
+							<xs:enumeration value="RESTRC" />
+							<xs:enumeration value="SECRET" />
+							<xs:enumeration value="TOPSRT" />
+							<xs:enumeration value="UNCLAS" />
+							<xs:enumeration value="UNMARK" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="FREETEXT" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>A free text description of the TSO. This
+							element may be used to add non-normalised information.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="500" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="URGENCY" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>--- Modified in version 1.2 --- Characterises
+							the urgency of the message. Possible values are URGENT and
+							NOT_URGENT.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="URGENT" />
+							<xs:enumeration value="NOT_URGENT" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="ORIGIN" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>It provides the identity of the creator /
+							emitter of the TSO.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ORG_ID">
+								<xs:annotation>
+									<xs:documentation>--- Modified in version 1.2 --- It
+										provides the unique identifier for an organisation
+										element.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="40" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="USER_ID" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>It provides the identifier of the user.
+										It shall be unique inside each organisation.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="80" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="NAME" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>--- New in version 1.2 --- It provides
+										the name (and eventually other information such as a contact
+										point, a
+										telephone number, an address) which identifies the agency and the
+										node.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="80" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="EXTERNAL_INFO" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Provides the capability to describe links to
+							additional external information Note: Implementations should
+							consider how
+							this reference affects the interpretation of the TSO in the case
+							where the
+							referenced TSO is not available to the recipient
+						</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="FREETEXT" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>--- Name has changed and optional in
+										version 1.2 --- It provides a short description of the external
+										information.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="500" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="URI">
+								<xs:annotation>
+									<xs:documentation>A full absolute URI, typically a
+										Uniform Resource Locator that can be used to retrieve the resource
+										file
+										over the network (Internet, Intranet).
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:anyURI">
+										<xs:maxLength value="200" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="TYPE" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>--- New in version 1.2 --- This
+										provides the type of the attached information such as PHOTO, MAP,
+										MANUAL,
+										WEBSITE (cf. the TSO data dictionary).
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="8" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EVENT">
+		<xs:annotation>
+			<xs:documentation>--- Mandatory for version 2.0 --- This part of the
+				TSO describes the event to which the emergency is
+				related.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ID">
+					<xs:annotation>
+						<xs:documentation>--- Name and type changed in version 1.2 ---
+							Mandatory for version 2.0 --- It provides the identifier of the
+							event for
+							the organisation element which is providing the TSO.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="40" />
+							<xs:minLength value="1" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="NAME" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>--- New in version 2.0 --- Provides a name
+							for the event. It is the responsibility of the node to have unique
+							event
+							names.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:minLength value="1" />
+							<xs:maxLength value="40" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="MAIN_EVENT_ID" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>--- New in version 1.2 --- Optional link to
+							the main event (in this case, the current event is a sub-event of
+							this main
+							event).
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:minLength value="1" />
+							<xs:maxLength value="40" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="ETYPE" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>--- Name changed for version 1.4 --- Name and
+							structure changed in version 1.2 --- It provides the type of the
+							event
+						</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="CATEGORY" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>It provides the description of the
+										scenario which lead to the event. The complete list is in the data
+										dictionary.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="80" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="ACTOR" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>It provides the type of the endangered
+										object(s). Typical values are: Human, Animals, Critical site,
+										Vehicle (car,
+										truck, ship, aircraft, train, metro, tramway, cable car, etc.). The
+										complete list is in the data dictionary.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="80" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="LOCTYPE" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>It provides the type of the location
+										where the event is. The complete list is in the data
+										dictionary.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="80" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="ENV" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>It provides the general environment (or
+										context) of the event. The complete list is in the data
+										dictionary.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="80" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="SOURCE" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>It describes the origin of the declaration of
+							the event (if it was detected by a human, by a system,
+							etc.).
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="COMFOR" />
+							<xs:enumeration value="HUMDED" />
+							<xs:enumeration value="HUMOBS" />
+							<xs:enumeration value="SENSOR" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="SCALE" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>A value between 1 and 5.</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:integer">
+							<xs:minInclusive value="1" />
+							<xs:maxInclusive value="5" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="CERTAINTY" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>A percentage probability of occurrence of the
+							event (for example for events which are predicted). Note: this is
+							typically
+							used for computerised prediction of a future event (such as a flood
+							prediction according to meteorological measures).
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:integer">
+							<xs:minInclusive value="0" />
+							<xs:maxInclusive value="100" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="DECL_DATIME" type="xs:dateTime"
+					minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The date and time of the declaration that
+							event has occurred or is about to occur.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="OCC_DATIME" type="xs:dateTime"
+					minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>--- New in version 2.0 --- The date and time
+							of the occurence of the event.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="OBS_DATIME" type="xs:dateTime"
+					minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The date and time of the information
+							contained in this event description.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="STATUS" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The current status of the event: COM = event
+							complete, IPR= event in progress, NST= event not started -- New
+							in version
+							1.3 -- STOP = event under control, no need for additional
+							resource.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="NST" />
+							<xs:enumeration value="IPR" />
+							<xs:enumeration value="COM" />
+							<xs:enumeration value="STOP" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="RISK_ASSESSMNT" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The foreseen evolution of the event
+							(increasing / decreasing / stable).
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="INCREA" />
+							<xs:enumeration value="DECREA" />
+							<xs:enumeration value="STABLE" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="REFERENCE" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>--- New in V1.1 --- Provides the list of
+							events identifiers which may be related to the same
+							event.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:annotation>
+								<xs:documentation>--- Modified in V1.1: in 1.0 was an
+									optional unbounded sequence---
+								</xs:documentation>
+							</xs:annotation>
+							<xs:element name="ORG_ID">
+								<xs:annotation>
+									<xs:documentation>--- Modified in version 1.2 --- It
+										provides the unique identifier for a control room, if the element
+										OTHER_EVENT_ID is provided.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="40" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="OTHER_EVENT_ID" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>It provides identifiers for the same
+										event, if this event was also identified by other agencies. It shall
+										help
+										to maintain the consistency between agencies which have their
+										own
+										identification schemes.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="40" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="CASUALTIES" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Provides the count of the actual casualties
+							at the time of the CASUALTIES/ DATIME.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="CONTEXT">
+								<xs:annotation>
+									<xs:documentation>--- New in version 1.2 --- Possible
+										values: REQ_ACTION = requiring action), ALR_TREATED = already
+										treated,
+										PRED_URGENT = predicted urgent, PRED_MEDIUM = predicted medium term,
+										INITIAL_STAT = unconfirmed initial statement, indicates the
+										nature of the
+										event, PRELIM_STAT = preliminary assessment, made by an emergency
+										responder
+										on scene, who may not be qualified to perform triage but whose
+										description
+										of the incident is accepted
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="REQ_ACTION" />
+										<xs:enumeration value="ALR_TREATED" />
+										<xs:enumeration value="PRED_URGENT" />
+										<xs:enumeration value="PRED_MEDIUM" />
+										<xs:enumeration value="INITIAL_STAT" />
+										<xs:enumeration value="PRELIM_STAT" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="DATIME" type="xs:dateTime"
+								minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>--- Changed for version 1.2, as the
+										PREDICTED_CASUALTIES element has been removed --- For
+										predicted contexts,
+										it provides the date and time of the prediction.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="DECONT" type="xs:integer" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>--- Name changed in version 1.2 ---
+										Number of individuals who need or are treated against CBRN agents in
+										the
+										current context.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="TRIAGERED" type="xs:integer"
+								minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>This category has the highest priority
+										for treatment or evacuation, as urgent resuscitative
+										interventions are
+										required to ensure survival of the casualty or patient. Examples
+										include
+										airway obstruction, respiratory emergencies, shock and severe
+										trauma. It is
+										likely that such cases will die within 2 hours or earlier, in the
+										absence
+										of appropriate medical treatment.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="TRIAGEYELLOW" type="xs:integer"
+								minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>This comprises cases that require early
+										treatment, particularly surgery, and it is recommended that
+										evacuation to a
+										surgical facility take place within 6 hours of injury. Examples
+										include
+										visceral injury, closed thoracic injury without threatening asphyxia,
+										major
+										limb injuries and fractures, closed head injury, open eye injury
+										and
+										moderate burns.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="TRIAGEGREEN" type="xs:integer"
+								minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Treatment is less urgent in this
+										category and can be deferred if there are other casualties requiring
+										limited treatment or evacuation assets. Examples include
+										simple closed
+										fractures, soft tissue injury, closed chest injury and maxillary-facial
+										injury.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="TRIAGEBLACK" type="xs:integer"
+								minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>This category refers to casualties
+										whose injuries or illness are so serious that they have minimal
+										chances of
+										survival or who are dead on arrival. Should there be competition for
+										limited medical resources, such cases will have lower priority
+										for
+										evacuation or treatment, despite the severity of their condition.
+										Examples
+										include brain-stem death and terminal illness.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="MISSING" type="xs:integer"
+								minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Number of individuals reported or
+										presumed missing, kidnapped (etc) in the current
+										context.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="EVAC" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Provides the count of the actual persons who
+							are evacuated at the time of the EVAC/DATIME.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="DATIME" type="xs:dateTime"
+								minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>--- Changed for version 1.2, as the
+										PREDICTED_CASUALTIES element has been removed --- For
+										predicted contexts,
+										it provides the date and time of the prediction.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="DISPLACED" type="xs:integer"
+								minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Number of people who are moved from
+										their home due to the event.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="EVACUATED" type="xs:integer"
+								minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Number of individuals who are moved
+										outside their usual places of life (in shelter, in transport,
+										awaiting
+										transport, etc..).
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="EGEO" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>--- Name changed in version 1.4 --- Provides
+							information on the geographical position of the event. Several
+							geographical
+							areas could be provided, for example if several affected areas are
+							described.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="DATIME" type="xs:dateTime"
+								minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>--- Renamed in version 1.2 --- Modified
+										in V1.1 --- It provides the date and time for this geographical
+										area, for
+										example for predicting future damages.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="TYPE">
+								<xs:annotation>
+									<xs:documentation>--- Renamed in version 1.2--- Type of
+										the geographical information, from data dictionary. If an area
+										can be
+										classified with several types, it shall provide several GEO elements.
+										One
+										main GEO element shall describe the details of the area (including
+										the
+										GEO/POSITION element with a GEO/POSITION/COORD sub-element and a
+										GEO/POSITION/LOC_ID element). Then other GEO elements (of the
+										other types)
+										shall also provide a GEO/POSITION element providing the same value
+										for the
+										GEO/POSITION/LOC_ID (and without repeating the COORD
+										values).
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="80" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element ref="POSITION" />
+							<xs:element name="WEATHER" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>The weather at the location, from the
+										data dictionary. Where several WEATHER elements are present, all
+										are
+										applicable.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="40" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="FREETEXT" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>--- Name changed in version 1.2 ---
+										Free text information for description of the location and its
+										significance
+										in the context of the event.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="500" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="ID" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>--- New in version 1.3a --- Identifier
+										for this geographical area (for later reference). This ID shall
+										be unique
+										inside an event for the node.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="40" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="STATUS" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>--- New in version 1.3a --- If an event
+										has a number of GEOs, some of these GEOs may represent cordons or
+										roadblocks. The status of a Roadblock or Cordon
+										(Planned/Completed) may be
+										independent of the event itself. the valid values are: PLANNED, IN PLACE
+										and GONE.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="GONE" />
+										<xs:enumeration value="PLANNED" />
+										<xs:enumeration value="INPLACE" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="CAUSE" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>--- New in version 1.4 --- Cause of this
+							event. Valid values are: ACC – accidental, DEL – deliberate, NAT –
+							natural
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="ACC" />
+							<xs:enumeration value="DEL" />
+							<xs:enumeration value="NAT" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="FREETEXT" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>--- New in version 1.2 and moved in version
+							2.0--- It provides a textual additional information, for
+							providing
+							additional description of the event
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="500" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="POSITION" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Provides the position of the GEO element. Note: all
+				elements are optional, but at least one must be provided (it could
+				be only
+				the LOC_ID, only the NAME, or only the TYPE and COORD, or a combination
+				of
+				at least 2 of these elements).
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="LOC_ID" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>It provides an identifier, which is unique
+							inside the current TSO file. This identifier can be used in
+							another part of
+							the TSO in order to avoid duplicating the same position object (cf.
+							the
+							explanation of the TYPE element for an example of the use of this
+							element).
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="80" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="NAME" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Free text name of a named location (name of a
+							city, of a lake, etc.). Note: It is the responsibility of the
+							user
+							organizations to define a consisted approach to naming locations, for
+							example, using names from a particular map, or, in a multi-lingually
+							marked
+							area, such as Belgium or Wales, putting both names in separated by a
+							"/".
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="80" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="TYPE" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>--- New in V1.2 --- This element provides the
+							type of the geographical element. It is mandatory to provide this
+							element
+							if there is a COORD element. The following types are defined: POINT
+							= one
+							single geographical point, CIRCLE = one circle defined by the centre
+							and
+							any of the points of the circumference, LINE = a list of points
+							which are
+							building a line, SURFACE=a closed surface, GRID = a set of single points,
+							POLYGON = a list of points which are building a closed line.
+							ELLIPSE = one
+							ellipse defined by 3 points: the position of the 2 foci points, and one
+							position on the contour.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="80" />
+							<xs:enumeration value="POINT" />
+							<xs:enumeration value="CIRCLE" />
+							<xs:enumeration value="LINE" />
+							<xs:enumeration value="SURFACE" />
+							<xs:enumeration value="GRID" />
+							<xs:enumeration value="POLYGON" />
+							<xs:enumeration value="ELLIPSE" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="COORDSYS" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>--- New in version 2.0 --- It defines the
+							coordinate system in use in the TSO file. Currently the default
+							and only
+							valid value is EPSG:4326, which corresponds to WGS-84.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="10" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="COORD" type="COORDType" minOccurs="0"
+					maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>--- Modified in V1.1: mutiple coordinates are
+							allowed, removed from the sequence --- Provides a sequence of
+							geographical
+							points (one is the minimum) with at least their latitude and longitude
+							and
+							optionally the height.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="HEIGHT_ROLE" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>--- New in v1.2 --- This element provides the
+							meaning of the height parameter in the COORD element (if there is
+							one).
+							Values can be: minimum, maximum, average.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="MIN" />
+							<xs:enumeration value="MAX" />
+							<xs:enumeration value="AVE" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="ADDRESS" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>--- New in version 1.4 --- Provides a
+							physical address for this position. Includes the capability to provide
+							Marker Posts (Road infrastructure).
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="256" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="COORDType">
+		<xs:annotation>
+			<xs:documentation>--- New in V1.1 ---</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:annotation>
+				<xs:documentation>--- Modified in V1.1: single sequence instead of
+					multiple sequences --- This sequence provides the position of the
+					points
+					according to the type.
+				</xs:documentation>
+			</xs:annotation>
+			<xs:element name="LAT">
+				<xs:annotation>
+					<xs:documentation>It provides the latitude of one point in the
+						provided coordinate system
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:double">
+						<xs:minInclusive value="-90" />
+						<xs:maxInclusive value="+90" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="LON">
+				<xs:annotation>
+					<xs:documentation>It provides the longitude of one point in the
+						provided coordinate system
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:double">
+						<xs:minInclusive value="-180" />
+						<xs:maxInclusive value="+180" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="HEIGHT" type="xs:double" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>It provides the height above the mean sea level
+						in meters
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="RESOURCE">
+		<xs:annotation>
+			<xs:documentation>--- Modified in V1.1: mutiple resources are
+				directly described at the top level --- This part of the TSO
+				describes the
+				resources (human, vehicles, other hardware, etc...) which are involved in
+				an emergency. It describes each individual resource.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="RTYPE">
+					<xs:annotation>
+						<xs:documentation>--- Name changed in version 1.4 --- New in
+							version 1.2 --- It provides a relatively detailed description of
+							the
+							resource.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="CLASS">
+								<xs:annotation>
+									<xs:documentation>It provides the type of the resource
+										(rescue team, vehicle, tent, water purifier, etc...). The type is an
+										string, one acronym in the TSO data dictionary.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="80" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="CAPABILITY" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>It provides the main domains of
+										capabilities and competencies of the resource. It is a string, from the
+										TSO
+										data dictionary.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="80" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="CHARACTERISTICS" minOccurs="0"
+								maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>It provides information about the
+										physical main characteristics of the resource (heigth, weight, size,
+										etc.).
+										It is a string, from the TSO data dictionary.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="80" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="ID" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>--- Name and type changed in version 1.2 ---
+							It provides a unique identifier of the resource inside the TSO
+							node.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="80" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="ORG_ID" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>--- Modified in version 1.2 --- It provides
+							the unique identifier of the node which controls the resource. It
+							can be
+							omitted if the resource is controlled by the node which provides the
+							TSO.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="40" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="NAME" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>It provides a name for this resource (for
+							example the name of a person or of a team).
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="40" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="FREETEXT" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>--- Name changed for version 1.2 --- It
+							provides a textual additional information, for providing additional
+							description of the resource.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="500" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="RGEO" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>--- Name changed in version 1.4 --- New in
+							version 1.3 --- it allows to define several position of the
+							resource at
+							different times.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="DATIME" type="xs:dateTime"
+								minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>--- New in V1.3 --- It provides the
+										date and time for this geographical area, for example for defining
+										the
+										estimated time of arrival (ETA)
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="TYPE">
+								<xs:annotation>
+									<xs:documentation>--- New in version 1.3 --- Type of
+										geographical information, from data dictionary. If an area can
+										be
+										classified with several types, it shall provide several GEO
+										elements.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="80" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element ref="POSITION" />
+							<xs:element name="FREETEXT" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Free text information for description
+										of the location and its significance in the context of this
+										resource.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="500" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="ID" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>--- New in version 1.3a --- Identifier
+										for this geographical area (for later reference). This ID shall
+										be unique
+										inside an event for the node.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="40" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="QUANTITY" type="xs:double" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation> It provides the quantity of this type of
+							resource in the unit of measure provided in the UM
+							element.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="UM" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>It provides the unit for the quantity. The
+							type is a string, one acronym in the TSO data
+							dictionary.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="8" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="STATUS" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>--- Modified in V1.1: the VIRTUAL status has
+							been added -- Modified in v1.2 ---- It provides the status of
+							this
+							resource. Possible values are: AVAILB = available, UNAV = unavailable
+							(maybe permanently), MAINTC = in maintenance, RESRVD = reserved,
+							VIRTUAL =
+							resource is only virtual, IN_USE = currently in use, and will come back
+							to
+							the AVAILABLE status when its mission is finished. The status must
+							be
+							applicable to the type of the resource. For example, Human resources may
+							only be AVAILABLE, UNAVAILABLE or IN_USE -- Modified in version
+							1.3 -- the
+							IN_USE status can be detailed as MOBILE or ON_SCENE. --- Modified in
+							version 1.3a: a REQUEST value as been added.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="AVAILB" />
+							<xs:enumeration value="UNAV" />
+							<xs:enumeration value="MAINTC" />
+							<xs:enumeration value="RESRVD" />
+							<xs:enumeration value="VIRTUAL" />
+							<xs:enumeration value="IN_USE" />
+							<xs:enumeration value="IN_USE/MOBILE" />
+							<xs:enumeration value="IN_USE/ON_SCENE" />
+							<xs:enumeration value="REQUEST" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="NATIONALITY" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>It provides the national origin of this
+							resource. It is a string, from the ISO 3166-1-alpha-2 code
+							elements.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="2" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="CONTACT" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>--- Name changed in version 1.4 --- It
+							provides one or several addresses for a resource. This could be postal
+							addresses or electronic addresses (the type is
+							mandatory).
+						</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="TYPE">
+								<xs:annotation>
+									<xs:documentation>It provides which type of address is
+										given (postal address, email, web site, telephone number, etc.).
+										Possible
+										values are: PSTADD = postal address, EMLADD = email address, IPADD =
+										Internet address, FTPADD = FTP address, WWWADD = Web address,
+										PHNADD= phone
+										number, FAXADD = telefax address, PMRADD = professional radio
+										number.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="PSTADD" />
+										<xs:enumeration value="EMLADD" />
+										<xs:enumeration value="IPADD" />
+										<xs:enumeration value="FTPADD" />
+										<xs:enumeration value="WWWADD" />
+										<xs:enumeration value="PHNADD" />
+										<xs:enumeration value="FAXADD" />
+										<xs:enumeration value="PMRADD" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="DETAIL">
+								<xs:annotation>
+									<xs:documentation>It provides one actual address of the
+										resource.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="200" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MISSION">
+		<xs:annotation>
+			<xs:documentation>--- Modified in V1.1: mutiple missions are directly
+				described at the top level --- This part of the TSO describes the
+				missions
+				which are completed, which are active and which are planned. It describes
+				each individual mission
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="TYPE" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>--- Change in version 1.4: multiple values
+							are allowed --- Name changed in version 1.2 --- It provides the type
+							of the
+							mission. The type is an string, one acronym in the TSO data
+							dictionary.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="80" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="FREETEXT" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>--- Name changed in version 1.2 --- It
+							provides a short (optional) textual description of the
+							mission.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="500" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="ID" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>--- Name changed in version 1.2 --- It
+							provides a unique identifier of the mission inside the emitter control
+							room.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="40" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="MAIN_MISSION_ID" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>--- New in version 1.2 --- Optional link to
+							the main mission (in this case, the current mission is a sub-mission
+							of
+							this main mission)
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="40" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="ORG_ID" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>--- Modified in version 1.2 --- It provides
+							the unique identifier of the node which controls the mission. It can
+							be
+							omitted if the mission is controlled by the node which provides the
+							TSO
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="40" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="NAME" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>--- New in version 1.2 --- Provides a name
+							for this mission ("evacuation of the area of Elancourt" for
+							example).
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="80" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="STATUS" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>It describes the current status of the
+							mission. The possible values are: ABO = mission aborted, CANCLD = mission
+							cancelled, COM = mission complete, IPR = mission in progress (2
+							additional
+							digits - such as IPR50 - may provide the percentage of completeness of
+							the
+							mission), NST = mission is not started, PAU = mission is paused and will
+							restart later.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:pattern value="ABO" />
+							<xs:pattern value="CANCLD" />
+							<xs:pattern value="COM" />
+							<xs:pattern value="IPR" />
+							<xs:pattern value="IPR\d{2}" />
+							<xs:pattern value="NST" />
+							<xs:pattern value="PAU" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="START_TIME" type="xs:dateTime"
+					minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>It provides the date and time when this
+							mission begins.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="END_TIME" type="xs:dateTime" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>It provides the date and time when this
+							mission is supposed to finish.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="RESOURCE_ID" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Provides the link with the description in the
+							RESOURCE/ID element(s).
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="80" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="PARENT_MISSION_ID" minOccurs="0"
+					maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>It provides the list of the missions which
+							shall be completed before the beginning of this mission.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="40" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="CHILD_MISSION_ID" minOccurs="0"
+					maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>It provides the list of the missions which
+							shall start when this mission is finished.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="40" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element ref="POSITION" minOccurs="0" />
+				<xs:element name="PRIORITY" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>It provides the priority level for this
+							mission (an integer between 0=low priority to 5=highest
+							priority).
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:integer">
+							<xs:minInclusive value="0" />
+							<xs:maxInclusive value="5" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema> 

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:edxlDistribution xlink:role="http://tempuri.org" xlink:title="" xlink:type="extended" xmlns:ct="urn:oasis:names:tc:emergency:edxl:ct:1.0" xmlns:edxl-gsf="urn:oasis:names:tc:emergency:edxl:gsf:1.0" xmlns:ext="urn:oasis:names:tc:emergency:edxl:extension:1.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:p="urn:oasis:names:tc:emergency:EDXL:DE:2.0" xmlns:p1="urn:oasis:names:tc:emergency:edxl:ciq:1.0:xpil" xmlns:p2="urn:oasis:names:tc:emergency:edxl:ciq:1.0:xnl" xmlns:p3="urn:oasis:names:tc:emergency:edxl:ciq:1.0:ct" xmlns:p4="urn:oasis:names:tc:emergency:edxl:ciq:1.0:xal" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:emergency:EDXL:DE:2.0 edxlde/edxl-de-v2.0-wd11.xsd ">
+  <p:distributionID>token</p:distributionID>
+  <p:senderID>token</p:senderID>
+  <p:dateTimeSent>2001-12-31T12:00:00</p:dateTimeSent>
+  <p:dateTimeExpires>2001-12-31T12:00:00</p:dateTimeExpires>
+  <p:distributionStatus>Actual</p:distributionStatus>
+  <p:distributionKind>Report</p:distributionKind>
+  <ext:extension>
+    <ext:community>http://tempuri.org</ext:community>
+    <ext:id>http://tempuri.org</ext:id>
+    <ext:parameter>
+      <ext:nameURI xPath="">http://tempuri.org</ext:nameURI>
+      <ext:value uom="">token</ext:value>
+    </ext:parameter>
+  </ext:extension>
+  <p:descriptor xlink:label="NCName" xlink:role="http://tempuri.org" xlink:title="" xlink:type="resource">
+    <p:combinedConfidentiality>Unclassified</p:combinedConfidentiality>
+    <p:language>EN</p:language>
+    <p:senderRole>
+      <ct:ValueListURI>http://tempuri.org</ct:ValueListURI>
+      <ct:Value>ct:Value</ct:Value>
+    </p:senderRole>
+    <p:recipientRole>
+      <ct:ValueListURI>http://tempuri.org</ct:ValueListURI>
+      <ct:Value>ct:Value</ct:Value>
+    </p:recipientRole>
+    <p:keyword>
+      <ct:ValueListURI>http://tempuri.org</ct:ValueListURI>
+      <ct:Value>ct:Value</ct:Value>
+    </p:keyword>
+    <p:explicitAddress>
+      <p:explicitAddressScheme>token</p:explicitAddressScheme>
+      <p:explicitAddressValue>token</p:explicitAddressValue>
+    </p:explicitAddress>
+    <p:targetAreas>
+      <p:areaKind>SourceTargetArea</p:areaKind>
+      <p:areaGrouping>Intersection</p:areaGrouping>
+      <p:targetArea>
+        <edxl-gsf:EDXLGeoLocation>
+          <gml:Point axisLabels="" gml:id="idvalue0" srsDimension="1" srsName="http://tempuri.org" uomLabels="">
+            <gml:pos axisLabels="" srsDimension="1" srsName="http://tempuri.org" uomLabels="">gml:pos</gml:pos>
+          </gml:Point>
+        </edxl-gsf:EDXLGeoLocation>
+      </p:targetArea>
+    </p:targetAreas>
+    <p:urgency>Immediate</p:urgency>
+    <p:severity>Extreme</p:severity>
+    <p:certainty>Observed</p:certainty>
+    <p:incidentID>token</p:incidentID>
+    <p:incidentDescription>token</p:incidentDescription>
+    <p:link xlink:actuate="onLoad" xlink:arcrole="http://tempuri.org" xlink:from="NCName" xlink:show="new" xlink:title="" xlink:to="NCName" xlink:type="arc"/>
+    <ext:extension>
+      <ext:community>http://tempuri.org</ext:community>
+      <ext:id>http://tempuri.org</ext:id>
+      <ext:parameter>
+        <ext:nameURI xPath="">http://tempuri.org</ext:nameURI>
+        <ext:value uom="">token</ext:value>
+      </ext:parameter>
+    </ext:extension>
+  </p:descriptor>
+  <p:content xlink:label="NCName" xlink:role="http://tempuri.org" xlink:title="" xlink:type="resource">
+    <p:contentObject xlink:label="NCName" xlink:role="http://tempuri.org" xlink:title="" xlink:type="resource">
+      <p:contentXML>
+        <p:embeddedXMLContent>
+          <p:contentDescriptor/>
+        </p:embeddedXMLContent>
+      </p:contentXML>
+    </p:contentObject>
+    <p:link xlink:actuate="onLoad" xlink:arcrole="http://tempuri.org" xlink:from="NCName" xlink:show="new" xlink:title="" xlink:to="NCName" xlink:type="arc"/>
+  </p:content>
+  <p:other>
+    <p:contentDescriptor/>
+  </p:other>
+</p:edxlDistribution>

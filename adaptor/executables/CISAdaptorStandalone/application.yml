@@ -1,0 +1,4 @@
+# HTTP Server
+server:
+  contextPath: /core
+  port: 0 

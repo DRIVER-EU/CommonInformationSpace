@@ -1,0 +1,8 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.google</groupId>
+  <artifactId>caplibrary</artifactId>
+  <name>caplibrary</name>
+  <version>r11</version>
+  <description></description>
+</project>

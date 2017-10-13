@@ -1,0 +1,1701 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.infoterra.co.uk/Mlp"
+           xmlns:wmh="http://www.wmhelp.com/2003/eGenerator"
+           elementFormDefault="qualified"
+           targetNamespace="http://www.infoterra.co.uk/Mlp"
+           xmlns:mdcg="http://www.infoterra.co.uk/Mdcg"
+           version="2.4">
+  <xs:import namespace="http://www.infoterra.co.uk/Mdcg" schemaLocation="Infoterra.Mdcg.Message.xsd"/>  
+  <xs:element name="svc_init">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="hdr" />
+        <xs:choice>
+          <xs:element ref="slir" />
+          <xs:element ref="slra" />
+          <xs:element ref="eme_lir" />
+          <xs:element ref="tlrr" />
+          <xs:element ref="tlrsr" />
+          <xs:element ref="eads_tdrr" />
+          <xs:element ref="eads_kamr" />
+          <xs:element ref="eads_rr" />
+          <xs:element ref="eads_ur" />
+          <xs:element ref="eads_tdsr" />
+          <xs:element name="eads_im" type="eads_im_type" />
+          <xs:element ref="eads_tetra_SDSTL" />
+          <xs:element ref="eads_tetra_SDSTL_ack" />
+          <xs:element ref="eads_tetra_status" />
+          <xs:element ref="eads_tetra_status_ack" />
+          <xs:element name="MlpCCXMLMessage" type="mdcg:MlpCCXMLMessageType"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="ver" type="xs:string" fixed="3.2.0" />
+    </xs:complexType>
+  </xs:element>
+    
+    <xs:element name="svc_result">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="hdr" minOccurs="0"/>
+                <xs:choice maxOccurs="unbounded" >
+                    <xs:element ref="slia"/>
+                    <xs:element ref="slirep"/>
+                    <xs:element ref="slrep"/>
+                    <xs:element ref="slra"/>
+                    <xs:element ref="eme_lia"/>
+                    <xs:element ref="emerep"/>
+                    <xs:element ref="eme_lirep"/>
+                    <xs:element ref="tlra"/>
+                    <xs:element ref="tlrep"/>
+                    <xs:element ref="tlrsa"/>
+                    <xs:element ref="eads_tdra"/>
+                    <xs:element ref="eads_tdrep"/>
+                    <xs:element ref="eads_kama"/>
+                    <xs:element ref="eads_ra"/>
+                    <xs:element ref="eads_ua"/>
+                    <xs:element ref="eads_tdsa"/>
+                    <xs:element ref="eads_ima"/>
+                    <xs:element ref="eads_tcr"/>
+                    <xs:element ref="eads_tetra_SDSTL" />
+                    <xs:element ref="eads_tetra_SDSTL_ack" />
+                    <xs:element ref="eads_tetra_status" />
+                    <xs:element ref="eads_tetra_status_ack" />
+                    <xs:element ref="eads_lpvr" />
+                    <xs:element name="MlpCCXMLMessage" type="mdcg:MlpCCXMLMessageType"/>
+                </xs:choice>
+            </xs:sequence>
+            <xs:attribute name="ver" type="xs:string" fixed="3.2.0"/>
+        </xs:complexType>
+    </xs:element>    
+    
+  <xs:element name="client">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="id" />
+        <xs:element ref="pwd" minOccurs="0" />
+        <xs:element ref="serviceid" minOccurs="0" />
+        <xs:element ref="requestmode" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="sessionid" type="xs:string" />
+  <xs:element name="id" type="xs:string" />
+  <xs:element name="requestor">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="id" />
+        <xs:element ref="serviceid" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="type" default="MSISDN">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="MSISDN" />
+            <xs:enumeration value="NAME" />
+            <xs:enumeration value="E-MAIL" />
+            <xs:enumeration value="URL" />
+            <xs:enumeration value="SIPURL" />
+            <xs:enumeration value="IMS" />
+            <xs:enumeration value="MDN" />
+            <xs:enumeration value="ASID" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pwd" type="xs:string" />
+  <xs:element name="serviceid" type="xs:string" />
+  <xs:element name="requestmode">
+    <xs:complexType>
+      <xs:attribute name="type" default="PASSIVE">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="ACTIVE" />
+            <xs:enumeration value="PASSIVE" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="subclient">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="id" />
+        <xs:element ref="pwd" minOccurs="0" />
+        <xs:element ref="serviceid" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="last_client" default="NO">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="YES" />
+            <xs:enumeration value="NO" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="msid">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="type" default="MSISDN">
+            <xs:simpleType>
+              <xs:restriction base="xs:NMTOKEN">
+                <xs:enumeration value="MSISDN" />
+                <xs:enumeration value="IMSI" />
+                <xs:enumeration value="IMEI" />
+                <xs:enumeration value="MIN" />
+                <xs:enumeration value="MDN" />
+                <xs:enumeration value="EME_MSID" />
+                <xs:enumeration value="ASID" />
+                <xs:enumeration value="OPE_ID" />
+                <xs:enumeration value="IPV4" />
+                <xs:enumeration value="IPV6" />
+                <xs:enumeration value="SESSID" />
+                <xs:enumeration value="SIP_URI" />
+                <xs:enumeration value="TEL_URL" />
+                <xs:enumeration value="TETRAPOL_RFSI" />
+                <xs:enumeration value="TETRAPOL_EXTERNAL_IDENTIFIER" />
+                <xs:enumeration value="APCO" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="enc" default="ASC">
+            <xs:simpleType>
+              <xs:restriction base="xs:NMTOKEN">
+                <xs:enumeration value="ASC" />
+                <xs:enumeration value="CRP" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="msid_range">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="start_msid" />
+        <xs:element ref="stop_msid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="msids">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice maxOccurs="unbounded">
+          <xs:sequence>
+            <xs:element ref="msid" />
+            <xs:element ref="codeword" minOccurs="0" />
+            <xs:element ref="session" minOccurs="0" />
+            <xs:element ref="trans_id" minOccurs="0" />
+          </xs:sequence>
+          <xs:sequence>
+            <xs:element ref="msid_range" />
+            <xs:element ref="codeword" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="codeword" type="xs:string" />
+  <xs:element name="esrd">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="type" default="NA">
+            <xs:simpleType>
+              <xs:restriction base="xs:NMTOKEN">
+                <xs:enumeration value="NA" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="esrk">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="type" default="NA">
+            <xs:simpleType>
+              <xs:restriction base="xs:NMTOKEN">
+                <xs:enumeration value="NA" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="session">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="type" use="required">
+            <xs:simpleType>
+              <xs:restriction base="xs:NMTOKEN">
+                <xs:enumeration value="APN" />
+                <xs:enumeration value="DIAL" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="start_msid">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="msid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="stop_msid">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="msid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="trans_id" type="xs:string" />
+  <xs:element name="eme_event">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="eme_pos" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="eme_trigger" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="EME_ORG" />
+            <xs:enumeration value="EME_REL" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="tlrr_event">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="ms_action" />
+        <xs:element ref="change_area" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ms_action">
+    <xs:complexType>
+      <xs:attribute name="type" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="MS_AVAIL" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="change_area">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="target_area" />
+        <xs:element ref="no_of_reports" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="type" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="MS_ENTERING" />
+            <xs:enumeration value="MS_LEAVING" />
+            <xs:enumeration value="MS_WITHIN_AREA" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="loc_estimates" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="TRUE" />
+            <xs:enumeration value="FALSE" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="target_area">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="shape" />
+        <xs:element ref="cc" />
+        <xs:element ref="plmn" />
+        <xs:element ref="name_area" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="no_of_reports" type="xs:string" />
+  <xs:element name="name_area" type="xs:string" />
+  <xs:element name="plmn">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="mcc" />
+        <xs:element ref="mnc" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="interval" type="xs:string" />
+  <xs:element name="loc_type">
+    <xs:complexType>
+      <xs:attribute name="type" default="CURRENT">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="CURRENT" />
+            <xs:enumeration value="LAST" />
+            <xs:enumeration value="CURRENT_OR_LAST" />
+            <xs:enumeration value="LAST_OR_CURRENT" />
+            <xs:enumeration value="INITIAL" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="prio">
+    <xs:complexType>
+      <xs:attribute name="type" default="NORMAL">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="NORMAL" />
+            <xs:enumeration value="HIGH" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pushaddr">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="url" />
+        <xs:element ref="id" minOccurs="0" />
+        <xs:element ref="pwd" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="req_id" type="xs:string" />
+  <xs:element name="start_time">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="utc_off" type="xs:string" default="0000" />
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="stop_time">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="utc_off" type="xs:string" default="0000" />
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="duration" type="xs:string" />
+  <xs:element name="url" type="xs:string" />
+  <xs:element name="time_remaining" type="xs:string" />
+  <xs:element name="lcs_ref" type="xs:string" />
+  <xs:element name="eqop">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="resp_req" minOccurs="0" />
+        <xs:element ref="resp_timer" minOccurs="0" />
+        <xs:choice minOccurs="0">
+          <xs:element ref="ll_acc" />
+          <xs:element ref="hor_acc" />
+        </xs:choice>
+        <xs:element ref="alt_acc" minOccurs="0" />
+        <xs:element ref="max_loc_age" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="qop">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice minOccurs="0">
+          <xs:element ref="ll_acc" />
+          <xs:element ref="hor_acc" />
+        </xs:choice>
+        <xs:element ref="alt_acc" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ll_acc">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="qos_class">
+            <xs:simpleType>
+              <xs:restriction base="xs:NMTOKEN">
+                <xs:enumeration value="ASSURED" />
+                <xs:enumeration value="BEST_EFFORT" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="hor_acc">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="qos_class">
+            <xs:simpleType>
+              <xs:restriction base="xs:NMTOKEN">
+                <xs:enumeration value="ASSURED" />
+                <xs:enumeration value="BEST_EFFORT" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="alt_acc">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="qos_class">
+            <xs:simpleType>
+              <xs:restriction base="xs:NMTOKEN">
+                <xs:enumeration value="ASSURED" />
+                <xs:enumeration value="BEST_EFFORT" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="max_loc_age" type="xs:string" />
+  <xs:element name="resp_req">
+    <xs:complexType>
+      <xs:attribute name="type" default="DELAY_TOL">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="NO_DELAY" />
+            <xs:enumeration value="LOW_DELAY" />
+            <xs:enumeration value="DELAY_TOL" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="resp_timer" type="xs:string" />
+  <xs:element name="pos">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="msid" />
+        <xs:element ref="eads_tetrapol_associatedRT" minOccurs="0"/>
+        <xs:element name="eads_impl_spec_data" type="eads_implSpecData" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:choice>
+          <xs:element ref="pd" />
+          <xs:element ref="poserr" />
+        </xs:choice>
+        <xs:element ref="gsm_net_param" minOccurs="0" />
+        <xs:element ref="trans_id" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="pos_method">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="CELL" />
+            <xs:enumeration value="OTDOA" />
+            <xs:enumeration value="GPS" />
+            <xs:enumeration value="A-GPS" />
+            <xs:enumeration value="E-OTD" />
+            <xs:enumeration value="U-TDOA" />
+            <xs:enumeration value="AFLT" />
+            <xs:enumeration value="EFLT" />
+            <xs:enumeration value="UNKNOWN" />
+            <xs:enumeration value="OTHER" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+    
+  <xs:element name="eme_pos">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="msid" />
+        <xs:choice>
+          <xs:element ref="pd" />
+          <xs:element ref="poserr" />
+        </xs:choice>
+        <xs:element ref="esrd" minOccurs="0" />
+        <xs:element ref="esrk" minOccurs="0" />
+        <xs:element ref="trans_id" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="pos_method">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="CELL" />
+            <xs:enumeration value="OTDOA" />
+            <xs:enumeration value="GPS" />
+            <xs:enumeration value="A-GPS" />
+            <xs:enumeration value="E-OTD" />
+            <xs:enumeration value="U-TDOA" />
+            <xs:enumeration value="AFLT" />
+            <xs:enumeration value="EFLT" />
+            <xs:enumeration value="UNKNOWN" />
+            <xs:enumeration value="OTHER" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="trl_pos">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="msid" />
+        <xs:element ref="eads_tetrapol_associatedRT" minOccurs="0"/>
+        <xs:element name="eads_impl_spec_data" type="eads_implSpecData" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="eads_reason_for_sending" type="xs:unsignedByte" minOccurs="0" />
+        <xs:choice>
+          <xs:element ref="pd" />
+          <xs:element ref="poserr" />
+          <xs:element ref="time" />
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="trl_trigger" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="PERIODIC" />
+            <xs:enumeration value="MS_AVAIL" />
+            <xs:enumeration value="CHANGE_AREA" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="pos_method">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="CELL" />
+            <xs:enumeration value="OTDOA" />
+            <xs:enumeration value="GPS" />
+            <xs:enumeration value="A-GPS" />
+            <xs:enumeration value="E-OTD" />
+            <xs:enumeration value="U-TDOA" />
+            <xs:enumeration value="AFLT" />
+            <xs:enumeration value="EFLT" />
+            <xs:enumeration value="UNKNOWN" />
+            <xs:enumeration value="OTHER" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pd">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="time" />
+        <xs:element ref="shape" />
+        <xs:sequence minOccurs="0">
+          <xs:element ref="alt" />
+          <xs:element ref="alt_unc" minOccurs="0" />
+        </xs:sequence>
+        <xs:element ref="speed" minOccurs="0" />
+        <xs:element ref="direction" minOccurs="0" />
+        <xs:element ref="lev_conf" minOccurs="0" />
+        <xs:element ref="qos_not_met" minOccurs="0" />
+        <xs:element ref="eads_GPS_status" minOccurs="0"/>
+        <xs:element name="eads_impl_spec_shape" type="eads_implSpecData" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="poserr">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="result" />
+        <xs:element ref="add_info" minOccurs="0" />
+        <xs:element ref="time" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="time">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="utc_off" type="xs:string" default="0000" />
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="alt" type="xs:string" />
+  <xs:element name="alt_unc" type="xs:string" />
+  <xs:element name="qos_not_met">
+    <xs:complexType />
+  </xs:element>
+  <xs:element name="direction" type="xs:string" />
+  <xs:element name="speed" type="xs:string" />
+  <xs:element name="lev_conf" type="xs:string" />
+  <xs:element name="geo_info">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="CoordinateReferenceSystem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CoordinateReferenceSystem">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Identifier" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Identifier">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="code" />
+        <xs:element ref="codeSpace" />
+        <xs:element ref="edition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="code" type="xs:string" />
+  <xs:element name="codeSpace" type="xs:string" />
+  <xs:element name="edition" type="xs:string" />
+  <xs:element name="service_coverage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:sequence maxOccurs="unbounded">
+          <xs:element ref="cc" />
+          <xs:element ref="ndc" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="add_info" type="xs:string" />
+  <xs:element name="result">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="resid" type="xs:string" use="required" />
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="shape">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="Point" />
+        <xs:element ref="LineString" />
+        <xs:element ref="Polygon" />
+        <xs:element ref="Box" />
+        <xs:element ref="CircularArea" />
+        <xs:element ref="CircularArcArea" />
+        <xs:element ref="EllipticalArea" />
+        <xs:element ref="MultiLineString" />
+        <xs:element ref="MultiPoint" />
+        <xs:element ref="MultiPolygon" />
+        <xs:element ref="LinearRing" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="distanceUnit" type="xs:string" />
+  <xs:element name="angularUnit" type="xs:string" />
+  <xs:element name="angle" type="xs:string" />
+  <xs:element name="coord">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="X" />
+        <xs:element ref="Y" minOccurs="0" />
+        <xs:element ref="Z" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="X" type="xs:string" />
+  <xs:element name="Y" type="xs:string" />
+  <xs:element name="Z" type="xs:string" />
+  <xs:element name="Point">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="coord" />
+      </xs:sequence>
+      <xs:attribute name="gid" type="xs:string" />
+      <xs:attribute name="srsName" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LineString">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="coord" />
+        <xs:element ref="coord" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="gid" type="xs:string" />
+      <xs:attribute name="srsName" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Box">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="coord" />
+        <xs:element ref="coord" />
+      </xs:sequence>
+      <xs:attribute name="gid" type="xs:string" />
+      <xs:attribute name="srsName" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LinearRing">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="coord" />
+        <xs:element ref="coord" />
+        <xs:element ref="coord" />
+        <xs:element ref="coord" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="gid" type="xs:string" />
+      <xs:attribute name="srsName" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Polygon">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="outerBoundaryIs" />
+        <xs:element ref="innerBoundaryIs" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="gid" type="xs:string" />
+      <xs:attribute name="srsName" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="outerBoundaryIs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="LinearRing" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="innerBoundaryIs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="LinearRing" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CircularArcArea">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="coord" />
+        <xs:element ref="inRadius" />
+        <xs:element ref="outRadius" />
+        <xs:element ref="startAngle" />
+        <xs:element ref="stopAngle" />
+        <xs:element ref="angularUnit" minOccurs="0" />
+        <xs:element ref="distanceUnit" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="gid" type="xs:string" />
+      <xs:attribute name="srsName" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CircularArea">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="coord" />
+        <xs:element ref="radius" />
+        <xs:element ref="distanceUnit" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="gid" type="xs:string" />
+      <xs:attribute name="srsName" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EllipticalArea">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="coord" />
+        <xs:element ref="angle" />
+        <xs:element ref="semiMajor" />
+        <xs:element ref="semiMinor" />
+        <xs:element ref="angularUnit" minOccurs="0" />
+        <xs:element ref="distanceUnit" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="gid" type="xs:string" />
+      <xs:attribute name="srsName" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="inRadius" type="xs:string" />
+  <xs:element name="outRadius" type="xs:string" />
+  <xs:element name="radius" type="xs:string" />
+  <xs:element name="semiMajor" type="xs:string" />
+  <xs:element name="semiMinor" type="xs:string" />
+  <xs:element name="startAngle" type="xs:string" />
+  <xs:element name="stopAngle" type="xs:string" />
+  <xs:element name="MultiLineString">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="LineString" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="gid" type="xs:string" />
+      <xs:attribute name="srsName" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MultiPoint">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Point" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="gid" type="xs:string" />
+      <xs:attribute name="srsName" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MultiPolygon">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element ref="Polygon" />
+          <xs:element ref="Box" />
+          <xs:element ref="CircularArea" />
+          <xs:element ref="CircularArcArea" />
+          <xs:element ref="EllipticalArea" />
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="gid" type="xs:string" />
+      <xs:attribute name="srsName" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="gsm_net_param">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="cgi" minOccurs="0" />
+        <xs:element ref="neid" minOccurs="0" />
+        <xs:element ref="nmr" minOccurs="0" />
+        <xs:element ref="ta" minOccurs="0" />
+        <xs:element ref="lmsi" minOccurs="0" />
+        <xs:element ref="imsi" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="cgi">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="mcc" />
+        <xs:element ref="mnc" />
+        <xs:element ref="lac" />
+        <xs:element ref="cellid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="neid">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="vmscid" minOccurs="0"/>
+        <xs:element ref="vlrid" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+
+  <xs:element name="vmscid">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="cc" minOccurs="0" />
+        <xs:element ref="ndc" minOccurs="0" />
+        <xs:element ref="vmscno" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vlrid">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="cc" minOccurs="0" />
+        <xs:element ref="ndc" minOccurs="0" />
+        <xs:element ref="vlrno" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="nmr" type="xs:string" />
+  <xs:element name="mcc" type="xs:string" />
+  <xs:element name="mnc" type="xs:string" />
+  <xs:element name="ndc" type="xs:string" />
+  <xs:element name="cc" type="xs:string" />
+  <xs:element name="vmscno" type="xs:string" />
+  <xs:element name="vlrno" type="xs:string" />
+  <xs:element name="lac" type="xs:string" />
+  <xs:element name="cellid" type="xs:string" />
+  <xs:element name="ta" type="xs:string" />
+  <xs:element name="lmsi" type="xs:string" />
+  <xs:element name="imsi" type="xs:string" />
+  <xs:element name="hdr">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:sequence>
+          <xs:element ref="client" minOccurs="0" />
+          <xs:element ref="sessionid" minOccurs="0" />
+        </xs:sequence>
+        <xs:element ref="subclient" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element ref="requestor" minOccurs="0" />
+      </xs:sequence>
+      <!--05/07/2011 <xs:attribute> Inserted-->
+      <xs:attribute name="ver" type="xs:string" fixed="3.2.0"/>
+      <!--<xs:attribute name="ver" type="xs:anySimpleType" fixed="3.2.0"/>-->
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="slir">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice>
+          <xs:element ref="msids" />
+          <xs:sequence maxOccurs="unbounded">
+            <xs:element ref="msid" />
+            <xs:element ref="codeword" minOccurs="0" />
+            <xs:element ref="gsm_net_param" />
+            <xs:element ref="trans_id" minOccurs="0" />
+          </xs:sequence>
+        </xs:choice>
+        <xs:element ref="eqop" minOccurs="0" />
+        <xs:element ref="geo_info" minOccurs="0" />
+        <xs:element ref="loc_type" minOccurs="0" />
+        <xs:element ref="prio" minOccurs="0" />
+        <xs:element ref="pushaddr" minOccurs="0" />
+        <xs:element ref="service_coverage" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="ver" type="xs:string" fixed="3.2.0" />
+      <xs:attribute name="res_type" default="SYNC">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="SYNC" />
+            <xs:enumeration value="ASYNC" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="eme_lir">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice>
+          <xs:element ref="msids" />
+          <xs:sequence maxOccurs="unbounded">
+            <xs:element ref="msid" />
+            <xs:element ref="gsm_net_param" />
+            <xs:element ref="trans_id" minOccurs="0" />
+            <xs:element ref="esrd" minOccurs="0" />
+            <xs:element ref="esrk" minOccurs="0" />
+          </xs:sequence>
+        </xs:choice>
+        <xs:element ref="eqop" minOccurs="0" />
+        <xs:element ref="geo_info" minOccurs="0" />
+        <xs:element ref="loc_type" minOccurs="0" />
+        <xs:element ref="pushaddr" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="ver" type="xs:string" fixed="3.2.0" />
+      <xs:attribute name="res_type" default="SYNC">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="SYNC" />
+            <xs:enumeration value="ASYNC" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="tlrr">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="msids" />
+        <xs:element ref="interval" minOccurs="0" />
+        <xs:element ref="start_time" minOccurs="0" />
+        <xs:element ref="stop_time" minOccurs="0" />
+        <xs:element ref="duration" minOccurs="0" />
+        <xs:element ref="tlrr_event" minOccurs="0" />
+        <xs:element ref="qop" minOccurs="0" />
+        <xs:element ref="geo_info" minOccurs="0" />
+        <xs:element ref="pushaddr" minOccurs="0" />
+        <xs:element ref="loc_type" minOccurs="0" />
+        <xs:element ref="prio" minOccurs="0" />
+        <xs:element ref="service_coverage" minOccurs="0" />
+        <xs:element ref="eads_MaximumReportingDistance" minOccurs="0" />
+        <xs:element ref="eads_subscription_type" minOccurs="0" />
+        <xs:element ref="eads_location_status" minOccurs="0" />
+        <xs:element ref="eads_tpol_access_class" minOccurs="0" />
+        <xs:element ref="eads_tpol_periodic_profile" minOccurs="0" />
+        <xs:element ref="eads_P25_trg_SU_powered_ON" minOccurs="0" />
+        <xs:element ref="eads_P25_trg_SU_powered_OFF" minOccurs="0" />
+        <xs:element ref="eads_P25_trg_Emergency" minOccurs="0" />
+        <xs:element ref="eads_P25_trg_PTT" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="ver" type="xs:string" fixed="3.2.0" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="eads_MaximumReportingDistance">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="unit" default="METERS">
+            <xs:simpleType>
+              <xs:restriction base="xs:NMTOKEN">
+                <xs:enumeration value="METERS" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="eads_P25_trg_SU_powered_ON" type="xs:boolean">
+    <xs:annotation>
+      <xs:documentation>
+        Powered on Trigger
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+
+   <xs:element name="eads_P25_trg_SU_powered_OFF" type="xs:boolean">
+    <xs:annotation>
+      <xs:documentation>
+        Powered off Trigger
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+
+  <xs:element name="eads_P25_trg_Emergency" type="xs:boolean">
+    <xs:annotation>
+      <xs:documentation>
+        Send report when emergency mode is triggered
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+
+  <xs:element name="eads_P25_trg_PTT" type="xs:boolean">
+    <xs:annotation>
+      <xs:documentation>
+        Triggered on a release of the PTT button
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+    
+  <xs:element name="eads_subscription_type">
+    <xs:annotation>
+      <xs:documentation>immediate subscription = configuration authorised to send immediately; postponed subscription = configuration sent to RT only if RT requests the configuration</xs:documentation>
+    </xs:annotation>
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="immediate subscription" />
+        <xs:enumeration value="postponed subscription" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="eads_tpol_access_class">
+    <xs:annotation>
+      <xs:documentation>
+        define the access_class of the radio regarding DDCH service in practical use value 1 or value 2
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleType>
+      <xs:restriction base="xs:integer">
+        <xs:minInclusive value="0" />
+        <xs:maxInclusive value="15" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="eads_location_status" type="xs:boolean">
+    <xs:annotation>
+      <xs:documentation>
+        The location status determines if the radio terminal will send relative
+        location reports (value = 1) or absolute location reports (value = 0)
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="eads_tpol_periodic_profile">
+    <xs:annotation>
+      <xs:documentation>
+        define the periodic profile
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleType>
+      <xs:restriction base="xs:integer">
+        <xs:minInclusive value="0" />
+        <xs:maxInclusive value="7" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="tlrsr">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="req_id" />
+        <xs:element ref="lcs_ref" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="ver" type="xs:string" fixed="3.2.0" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="eads_tdrr">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="msids" />
+        <xs:element ref="pushaddr" minOccurs="0" />
+        <xs:element ref="eads_MaximumValidityAge" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="ver" type="xs:string" fixed="1.0.0" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="eads_MaximumValidityAge" type="xs:string" />
+  <xs:element name="eads_kamr">
+    <xs:complexType>
+      <xs:attribute name="ver" type="xs:string" fixed="1.0.0" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="eads_rr">
+    <xs:complexType>
+      <xs:attribute name="ver" type="xs:string" fixed="1.0.0" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="eads_ur">
+    <xs:complexType>
+      <xs:attribute name="ver" type="xs:string" fixed="1.0.0" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="eads_tdsr">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="req_id" />
+      </xs:sequence>
+      <xs:attribute name="ver" type="xs:string" fixed="1.0.0" />
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="eads_im_type">
+    <xs:annotation>
+      <xs:documentation>Information Message sent from CRA to MDG; reply from the MDG will be either AckMessage or NackMessage </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref="msids" />
+      <xs:element ref="eads_name_of_vehicle" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Name of the vehicle</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="eads_vehicle_ident" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Vehicle Identifier</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="eads_im" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Information Message body</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="MessageID" type="xs:string">
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="slra">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:sequence>
+          <xs:element ref="result"/>
+          <xs:element ref="msids"/>
+          <xs:element name="add_info" type="xs:string" minOccurs="0"/>
+          <xs:element name="eads_requested_status" type="xs:string" />
+          <xs:element name="eads_previous_status" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:sequence>
+      <xs:attribute name="ver" type="xs:anySimpleType" fixed="3.2.0"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="eads_name_of_vehicle" type="xs:string" />
+  <xs:element name="eads_vehicle_ident" type="xs:string" />
+  <xs:element name="eads_im" type="xs:string">
+    <xs:annotation>
+      <xs:documentation>Information Message body</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+    
+  <xs:element name="slia">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice>
+          <xs:element ref="pos" maxOccurs="unbounded"/>
+          <xs:element ref="req_id"/>
+          <xs:sequence>
+            <xs:element ref="result"/>
+            <xs:element ref="add_info" minOccurs="0"/>
+          </xs:sequence>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="ver" type="xs:string" fixed="3.0.0"/>
+    </xs:complexType>
+  </xs:element>
+    
+  <xs:element name="slirep">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="req_id"/>
+        <xs:element ref="pos" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="ver" type="xs:string" fixed="3.0.0"/>
+    </xs:complexType>
+  </xs:element>
+    
+  <xs:element name="slrep">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="pos" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="ver" type="xs:string" fixed="3.0.0"/>
+    </xs:complexType>
+  </xs:element>
+    
+  <xs:element name="eme_lia">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice>
+          <xs:element ref="eme_pos" maxOccurs="unbounded"/>
+          <xs:element ref="req_id"/>
+          <xs:sequence>
+            <xs:element ref="result"/>
+            <xs:element ref="add_info" minOccurs="0"/>
+          </xs:sequence>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="ver" type="xs:string" fixed="3.2.0"/>
+    </xs:complexType>
+  </xs:element>
+    
+  <xs:element name="eme_lirep">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="req_id"/>
+        <xs:choice>
+          <xs:element ref="eme_pos" maxOccurs="unbounded"/>
+          <xs:sequence>
+            <xs:element ref="result"/>
+            <xs:element ref="add_info" minOccurs="0"/>
+          </xs:sequence>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="ver" type="xs:string" fixed="3.2.0"/>
+    </xs:complexType>
+  </xs:element>
+    
+  <xs:element name="emerep">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="eme_event"/>
+      </xs:sequence>
+      <xs:attribute name="ver" type="xs:string" fixed="3.0.0"/>
+    </xs:complexType>
+  </xs:element>
+    
+  <xs:element name="tlra">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice>
+          <xs:sequence>
+            <xs:element ref="req_id"/>
+            <xs:element ref="lcs_ref" minOccurs="0"/>
+          </xs:sequence>
+          <xs:sequence>
+            <xs:element ref="result"/>
+            <xs:element ref="add_info" minOccurs="0"/>
+          </xs:sequence>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="ver" type="xs:string" fixed="3.2.0"/>
+    </xs:complexType>
+  </xs:element>
+    
+  <xs:element name="tlrep">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="req_id"/>
+        <xs:element ref="lcs_ref" minOccurs="0"/>
+        <xs:element ref="trl_pos" maxOccurs="unbounded"/>
+        <xs:element ref="time_remaining" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="ver" type="xs:string" fixed="3.2.0"/>
+    </xs:complexType>
+  </xs:element>
+    
+  <xs:element name="eads_GPS_status" type="xs:string">
+    <xs:annotation>
+      <xs:documentation>
+        defines the GPS location quality status
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+    
+  <xs:element name="eads_tetrapol_associatedRT" type="xs:string">
+    <xs:annotation>
+      <xs:documentation>
+        association between external tetrapol identifier (vehicle-identifier) and associated RFSI
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+    
+  <xs:element name="tlrsa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice>
+          <xs:element ref="req_id"/>
+          <xs:sequence>
+            <xs:element ref="result"/>
+            <xs:element ref="add_info" minOccurs="0"/>
+          </xs:sequence>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="ver" type="xs:string" fixed="3.0.0"/>
+    </xs:complexType>
+  </xs:element>
+    
+  <xs:element name="eads_tdra">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="req_id"/>
+        <xs:sequence>
+          <xs:element ref="result"/>
+          <xs:element ref="add_info" minOccurs="0"/>
+        </xs:sequence>
+      </xs:choice>
+      <xs:attribute name="ver" type="xs:string" fixed="1.0.0"/>
+    </xs:complexType>
+  </xs:element>
+    
+  <xs:element name="eads_tdrep">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="req_id"/>
+        <xs:element ref="eads_trl_td" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="ver" type="xs:string" fixed="1.0.0"/>
+    </xs:complexType>
+  </xs:element>
+    
+  <xs:element name="eads_trl_td">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="msid"/>
+        <xs:choice>
+          <xs:element ref="eads_td"/>
+          <xs:element ref="eads_tderr"/>
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+    
+  <xs:element name="eads_td">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="eads_radioSubscriberAddress" minOccurs="0"/>
+        <xs:element ref="eads_registered" minOccurs="0"/>
+        <xs:element ref="eads_exchangeId" minOccurs="0"/>
+        <xs:element ref="eads_locationAreaId" minOccurs="0"/>
+        <xs:element ref="eads_lastActiveAt" minOccurs="0"/>
+        <xs:element ref="eads_locationAreaIdWithValue" minOccurs="0"/>
+        <xs:element ref="eads_scanningOn" minOccurs="0"/>
+        <xs:element ref="eads_statusIndicator_statusValue" minOccurs="0"/>
+        <xs:element ref="eads_statusIndicator_timeOfSent" minOccurs="0"/>
+        <xs:element ref="eads_otherPartyAddress" minOccurs="0"/>
+        <xs:element ref="eads_otherPartyAddressWithValue" minOccurs="0"/>
+        <xs:element ref="eads_callType" minOccurs="0"/>
+        <xs:element ref="eads_emergencyState" minOccurs="0"/>
+        <xs:element ref="eads_dmoState" minOccurs="0"/>
+        <xs:element ref="eads_ActiveTalkGroup" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+    
+  <xs:element name="eads_radioSubscriberAddress" type="xs:string"/>
+  <xs:element name="eads_registered" type="xs:string"/>
+  <xs:element name="eads_exchangeId" type="xs:string"/>
+  <xs:element name="eads_locationAreaId" type="xs:string"/>
+  <xs:element name="eads_lastActiveAt" type="xs:string"/>
+  <xs:element name="eads_locationAreaIdWithValue" type="xs:string"/>
+  <xs:element name="eads_scanningOn" type="xs:string"/>
+  <xs:element name="eads_statusIndicator_statusValue" type="xs:string"/>
+  <xs:element name="eads_statusIndicator_timeOfSent" type="xs:string"/>
+  <xs:element name="eads_otherPartyAddress" type="xs:string"/>
+  <xs:element name="eads_otherPartyAddressWithValue" type="xs:string"/>
+  <xs:element name="eads_callType" type="xs:string"/>
+  <xs:element name="eads_emergencyState" type="xs:string"/>
+  <xs:element name="eads_dmoState" type="xs:string"/>
+  <xs:element name="eads_ActiveTalkGroup" type="xs:string"/>
+  <xs:element name="eads_tderr">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="result"/>
+        <xs:element ref="add_info" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+    
+  <xs:element name="eads_kama">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="result"/>
+        <xs:element ref="add_info" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="ver" type="xs:string" fixed="1.0.0"/>
+    </xs:complexType>
+  </xs:element>
+    
+  <xs:element name="eads_ra">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="result"/>
+        <xs:element ref="add_info" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="ver" type="xs:string" fixed="1.0.0"/>
+    </xs:complexType>
+  </xs:element>
+    
+  <xs:element name="eads_ua">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="result"/>
+        <xs:element ref="add_info" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="ver" type="xs:string" fixed="1.0.0"/>
+    </xs:complexType>
+  </xs:element>
+    
+  <xs:element name="eads_tdsa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="result"/>
+        <xs:element ref="add_info" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="ver" type="xs:string" fixed="1.0.0"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="eads_ima">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="msid"/>
+        <xs:element ref="eads_name_of_vehicle" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Name of the vehicle</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="eads_vehicle_ident" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Vehicle Identifier</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="MessageID" type="xs:string"/>
+        <xs:element ref="result"/>
+        <xs:element ref="add_info" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="eads_tetra_status">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="msid" />
+        <xs:element name="eads_tetra_status_value" type="xs:int" minOccurs="1" maxOccurs="1" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="eads_tetra_status_ack">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="msid" />
+        <xs:element name="eads_tetra_status_value" type="xs:int" minOccurs="0" maxOccurs="1" />
+        <xs:element name="method_status" type="xs:long" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="result" minOccurs="0" maxOccurs="1" />
+      </xs:sequence>
+      <xs:attribute name="ver" type="xs:anySimpleType" fixed="3.2.0"/>
+    </xs:complexType>
+  </xs:element>
+
+    <xs:element name="eads_lpvr">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="msid" />
+        <xs:element name="eads_registration_state" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="eads_request_protocol_version" type="xs:int" minOccurs="0" maxOccurs="1" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+    
+  <xs:complexType name="tcsMni">
+    <xs:sequence>
+      <xs:element name="landCode" type="xs:short" minOccurs="1" maxOccurs="1" />
+      <xs:element name="networkCode" type="xs:short" minOccurs="1" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tcsSubsciberAddress">
+    <xs:sequence>
+      <xs:element name="ssi" type="xs:long" minOccurs="0" />
+      <xs:element name="mni" type="tcsMni" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="tcsAddress">
+    <xs:sequence>
+      <xs:element name="SubscriberAddress" type="tcsSubsciberAddress" minOccurs="0" maxOccurs="1" />
+      <xs:element name="Fssn" type="xs:long" minOccurs="0" maxOccurs="1" />
+      <xs:element name="gw" type="xs:long" minOccurs="0" maxOccurs="1" />
+      <xs:element name="esn" type="xs:string" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tcsSDSTLValidityPeriod">
+    <xs:sequence>
+      <xs:element name="unit" type="xs:unsignedByte" minOccurs="1" maxOccurs="1" />
+      <xs:element name="value" type="xs:unsignedByte" minOccurs="1" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="eads_tetra_SDSTL">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="sender" type="tcsAddress" minOccurs="0" maxOccurs="1"  />
+        <xs:element name="target" type="tcsAddress" />
+        <xs:element name="timestamp" type="xs:dateTime" minOccurs="0" maxOccurs="1" />
+        <xs:element name="protocolId" type="xs:unsignedByte" />
+        <xs:element name="reportRequest" type="xs:unsignedByte" />
+        <xs:element name="serviceSelection" type="xs:unsignedByte" minOccurs="0" maxOccurs="1" />
+        <xs:element name="messageReference" type="xs:unsignedByte" minOccurs="0" />
+        <xs:element name="storage" type="xs:unsignedByte" />
+        <xs:element name="validity" type="tcsSDSTLValidityPeriod" />
+        <xs:element name="forwardAddress" type="tcsAddress"/>
+        <xs:element name="bitrowLength" type="xs:long" />
+        <xs:element name="userData" type="xs:base64Binary" minOccurs="1" maxOccurs="1" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="eads_tetra_SDSTL_ack">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="msid"/>
+        <xs:element name="messageReference" type="xs:unsignedByte" minOccurs="0" />
+        <xs:element name="deliveryStatus" type="xs:unsignedByte" minOccurs="0" />
+        <xs:element ref="result" minOccurs="0"/>
+        <xs:element ref="add_info" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="eads_tcr">
+    <xs:complexType mixed="false">
+      <xs:annotation>
+        <xs:documentation>The TETRAPOL configuration request message sent by a TETRAPOL terminal </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element ref="eads_name_of_vehicle" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Name of the vehicle</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="eads_vehicle_ident" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Vehicle Identifier</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="time">
+          <xs:annotation>
+            <xs:documentation>Status time</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="eads_GPS_status" minOccurs="0"/>
+
+        <xs:element name="Location">
+          <xs:annotation>
+            <xs:documentation>The mobile terminal location</xs:documentation>
+          </xs:annotation>
+
+          <xs:complexType>
+            <xs:annotation>
+              <xs:documentation>A common type for specifying location details</xs:documentation>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:element name="SRID" type="xs:unsignedInt" default="4326">
+                <xs:annotation>
+                  <xs:documentation>The Spatial Reference System Identifier as defined by the OGC. Default is SRID 4326 (WGS84)</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="X" type="xs:string">
+                <xs:annotation>
+                  <xs:documentation>X location</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="Y" type="xs:string">
+                <xs:annotation>
+                  <xs:documentation>Y location</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="Height" type="xs:float" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation>Z location</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element ref="eads_tetrapol_associatedRT" minOccurs="0"/>
+        <xs:element ref="eads_tetrapol_RTsoftwareversion" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+    
+  <xs:element name="eads_tetrapol_RTsoftwareversion" type="xs:string">
+    <xs:annotation>
+      <xs:documentation>
+        software version of RT
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+    
+ 	<xs:complexType name="eads_implSpecData">
+		<xs:simpleContent>
+			<xs:extension base="xs:hexBinary">
+				<xs:attribute name="impl_spec_tag" type="xs:unsignedInt"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+    
+  <xs:annotation>
+    <xs:documentation> MLP_SVC_RESULT </xs:documentation>
+    <xs:documentation>
+      MLP V3.2 Document Type Definition
+      Copyright Open Mobile Alliance Ltd., 2005
+      All rights reserved
+
+      MLP is an XML language. Typical usage:
+      &lt;?xml version="1.0"?&gt;
+      &lt;!DOCTYPE svc_result PUBLIC "-//OMA//DTD {abbrev x.y}//EN"
+      "http://www.openmobilealliance.org/DTD/{filename}"
+      [&lt;?oma-{ref}-ver supported-versions="{versions}"?&gt;]&gt;
+      &lt;svc_result&gt;
+      ...
+      &lt;/svc_result&gt;
+
+      Terms and conditions of use are available from the
+      Open Mobile Alliance Ltd. web site at
+      http://www.openmobilealliance.org/
+    </xs:documentation>
+  </xs:annotation>
+
+  <xs:annotation>
+    <xs:documentation> MLP_SVC_INIT </xs:documentation>
+    <xs:documentation>
+      MLP V3.2 Document Type Definition
+      Copyright Open Mobile Alliance Ltd., 2005
+      All rights reserved
+
+      MLP is an XML language. Typical usage:
+      &lt;?xml version="1.0"?&gt;
+      &lt;!DOCTYPE svc_init PUBLIC "-//OMA//DTD {abbrev x.y}//EN"
+      "http://www.openmobilealliance.org/DTD/{filename}"
+      [&lt;?oma-{ref}-ver supported-versions="{versions}"?&gt;]&gt;
+      &lt;svc_init&gt;
+      ...
+      &lt;/svc_init&gt;
+
+      Terms and conditions of use are available from the
+      Open Mobile Alliance Ltd. web site at
+      http://www.openmobilealliance.org/
+    </xs:documentation>
+  </xs:annotation>
+</xs:schema>

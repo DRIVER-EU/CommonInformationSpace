@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Emergency Data Exchange Language (EDXL) Distribution Element Version 2.0
+     Committee Specification 02
+     19 September 2013
+     Copyright (c) OASIS Open 2013. All Rights Reserved.
+     Source: http://docs.oasis-open.org/emergency/edxl-de/v2.0/cs02/examples/
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+  xmlns="http://myserver.org/test/"
+  targetNamespace="http://myserver.org/test/"
+  elementFormDefault="qualified">
+<!-- A dummy sample schema for defining a "test" element used in the
+WP_Appendix_Extra_Example_DE_2_ver05_9.xml example -->
+  <xs:element name="test" type="xs:string"/>
+  </xs:schema>
