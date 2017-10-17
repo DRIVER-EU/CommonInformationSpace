@@ -1,0 +1,16 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://api.nextgen-lab.net/discovery-server/eureka/     
+    registryFetchIntervalSeconds: 5
+  instance:
+    homePageUrlPath: ${server.contextPath}
+    statusPageUrlPath: ${server.contextPath}/info
+    healthCheckUrlPath: ${server.contextPath}/health
+    leaseRenewalIntervalInSeconds: 10
+    instance-id: distributor_id:${spring.application.instance_id:${random.value}}
+    
+# HTTP Server
+server:
+  contextPath: /core
+  port: 0 
