@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/api/java"/>
+	<classpathentry kind="src" path="src/impl/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/com/frequentis/cis/adapter/CISCore/2.0/CISCore-2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/commons-lang/commons-lang/2.6/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/com/google/caplibrary/r11/caplibrary-r11.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/com/frequentis/cis/adapter/CISExceptions/2.0/CISExceptions-2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/com/frequentis/cis/adapter/CISEMSILibrary/2.0/CISEMSILibrary-2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/org/apache/kafka/kafka-clients/0.11.0.1/kafka-clients-0.11.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-xml/2.5.3/jackson-dataformat-xml-2.5.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/org/antlr/ST4/4.0.8/ST4-4.0.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/org/codehaus/woodstox/woodstox-core-asl/4.4.1/woodstox-core-asl-4.4.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/io/springfox/springfox-swagger2/2.2.2/springfox-swagger2-2.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/com/fasterxml/jackson/module/jackson-module-jaxb-annotations/2.5.3/jackson-module-jaxb-annotations-2.5.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.5.3/c37875ff66127d93e5f672708cb2dcc14c8232ab/jackson-databind-2.5.3.jar" sourcepath="C:/Users/Pieter/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.5.3/f547023ac7ea86457b61505e03ff320811529805/jackson-databind-2.5.3-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/io/springfox/springfox-swagger-common/2.2.2/springfox-swagger-common-2.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/io/swagger/swagger-models/1.5.3/swagger-models-1.5.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.5.0/a2a55a3375bc1cef830ca426d68d2ea22961190e/jackson-annotations-2.5.0.jar" sourcepath="C:/Users/Pieter/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.5.0/88b177349b719fe0636b50889687b9ed036bfd89/jackson-annotations-2.5.0-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/net/jpountz/lz4/lz4/1.3.0/lz4-1.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/org/xerial/snappy/snappy-java/1.1.2.6/snappy-java-1.1.2.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/io/springfox/springfox-spring-web/2.2.2/springfox-spring-web-2.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/io/springfox/springfox-schema/2.2.2/springfox-schema-2.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/io/springfox/springfox-spi/2.2.2/springfox-spi-2.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/io/springfox/springfox-core/2.2.2/springfox-core-2.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/org/springframework/plugin/spring-plugin-metadata/1.2.0.RELEASE/spring-plugin-metadata-1.2.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/org/springframework/plugin/spring-plugin-core/1.2.0.RELEASE/spring-plugin-core-1.2.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/org/springframework/hateoas/spring-hateoas/0.18.0.RELEASE/spring-hateoas-0.18.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.5.3/jackson-core-2.5.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/org/codehaus/woodstox/stax2-api/3.1.4/stax2-api-3.1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/org/jdom/jdom/1.1/jdom-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/org/antlr/antlr-runtime/3.5.2/antlr-runtime-3.5.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/commons-io/commons-io/1.3.2/commons-io-1.3.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/org/mapstruct/mapstruct/1.0.0.CR1/mapstruct-1.0.0.CR1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/io/swagger/swagger-annotations/1.5.3/swagger-annotations-1.5.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/com/google/guava/guava/18.0/guava-18.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/com/fasterxml/classmate/1.2.0/classmate-1.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/org/aspectj/aspectjrt/1.8.6/aspectjrt-1.8.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/org/aspectj/aspectjweaver/1.8.6/aspectjweaver-1.8.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/org/springframework/spring-webmvc/4.1.7.RELEASE/spring-webmvc-4.1.7.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/org/springframework/spring-web/4.1.7.RELEASE/spring-web-4.1.7.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/4.1.7.RELEASE/8c6c02bcccfa23a74db59f7b7725e69e1af38f04/spring-context-4.1.7.RELEASE.jar" sourcepath="C:/Users/Pieter/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/4.1.7.RELEASE/f3c674e1c33fd986673473fb0266a74f1fb2507e/spring-context-4.1.7.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/4.1.7.RELEASE/127f005bac8ec1fbbbc5bb1595d78c6179394a46/spring-aop-4.1.7.RELEASE.jar" sourcepath="C:/Users/Pieter/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/4.1.7.RELEASE/b2afe3ed87e14fad43344656b9212abe4b94f070/spring-aop-4.1.7.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/4.1.7.RELEASE/e52148e9671e2918a2172c9cf56b77bede2042ce/spring-beans-4.1.7.RELEASE.jar" sourcepath="C:/Users/Pieter/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/4.1.7.RELEASE/9f2d2a6e2c8c0263431172951c08fc762f21fa32/spring-beans-4.1.7.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/4.1.7.RELEASE/9bc3b81d05961f042ea4a45e84d60cdc59ea51f5/spring-expression-4.1.7.RELEASE.jar" sourcepath="C:/Users/Pieter/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/4.1.7.RELEASE/f31f68f812e3ba032b9dc5bc11a3adc0808c81b2/spring-expression-4.1.7.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/org/springframework/spring-core/4.1.7.RELEASE/spring-core-4.1.7.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/commons-logging/commons-logging/1.2/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.5/cf993e250ff71804754ec2734a16f23c0be99f70/commons-codec-1.5.jar" sourcepath="C:/Users/Pieter/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.5/1100638866461d41fbed0e89d722b161c579fe23/commons-codec-1.5-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.gradle/caches/modules-2/files-2.1/org.codehaus.jackson/jackson-mapper-asl/1.8.5/56439095aa051521c5abb330235820c66886b5e5/jackson-mapper-asl-1.8.5.jar" sourcepath="C:/Users/Pieter/.gradle/caches/modules-2/files-2.1/org.codehaus.jackson/jackson-mapper-asl/1.8.5/7ccd4c682958ee3c0465a904621cdeebe2d86e61/jackson-mapper-asl-1.8.5-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.gradle/caches/modules-2/files-2.1/org.codehaus.jackson/jackson-core-asl/1.8.5/713a5564acb9a5467521bbb53221ab8e1fe65039/jackson-core-asl-1.8.5.jar" sourcepath="C:/Users/Pieter/.gradle/caches/modules-2/files-2.1/org.codehaus.jackson/jackson-core-asl/1.8.5/4161f28a79dcc9c3c2ca9dac1ebbb583395bc630/jackson-core-asl-1.8.5-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.gradle/caches/modules-2/files-2.1/junit/junit/4.9/1013627e3993319870863a020034004717505815/junit-4.9.jar" sourcepath="C:/Users/Pieter/.gradle/caches/modules-2/files-2.1/junit/junit/4.9/84b903feddab2bd58f5ab2fc0c5c636df42df74d/junit-4.9-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pieter/.m2/repository/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
