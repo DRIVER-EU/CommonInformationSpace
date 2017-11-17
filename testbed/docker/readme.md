@@ -47,24 +47,24 @@ A single Kafka Broker is running and available at `PLAINTEXT://broker:9092`
 
 ## Schema Registry
 
-The [Kafka Schema Registry](https://docs.confluent.io/current/schema-registry/docs/index.html) is reachable at `http://schema_registry:3502` or `http://localhost:3502`
+The [Kafka Schema Registry](https://docs.confluent.io/current/schema-registry/docs/index.html) is reachable at http://schema_registry:3502 or http://localhost:3502
 
 ## Kafka Connect
 
-The [Kafka Connect](https://docs.confluent.io/current/connect/index.html) REST endpoint is reachable at `http://connect:3504` or `http://localhost:3504`.
+The [Kafka Connect](https://docs.confluent.io/current/connect/index.html) REST endpoint is reachable at http://connect:3504 or `http://localhost:3504`.
 
 ## Kafka REST Proxy
 
-The [Kafka REST Proxy](https://docs.confluent.io/current/kafka-rest/docs/index.html) can be reached at `http://kafka_rest:8082` or `http://localhost:8082`.
+The [Kafka REST Proxy](https://docs.confluent.io/current/kafka-rest/docs/index.html) can be reached at http://kafka_rest:8082 or http://localhost:8082.
 
 ## Kafka Topics UI
 
-A web interface that allows you to browse and search the topics that are available on the Kafka cluster is available at `http://localhost:3600`.
+A web interface that allows you to browse and search the topics that are available on the Kafka cluster is available at http://localhost:3600.
 
 ## Kafka Schema Registry UI
 
-A web interface that allows inspection and creation of AVRO schemas in the schema regisrty is available at `http://localhost:3601'.
+A web interface that allows inspection and creation of AVRO schemas in the schema regisrty is available at http://localhost:3601.
 
 ## Kafka Connect UI
 
-A web interface that allows inspection and creation of Kafka Connectors (data sinks and sources) is available at `http://localhost:3602`.
+A web interface that allows inspection and creation of Kafka Connectors (data sinks and sources) is available at http://localhost:3602.
