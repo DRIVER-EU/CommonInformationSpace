@@ -1,59 +1,70 @@
-# Running the Common Information Space Development Environment on Docker on a local machine
+# Testbed Docker Compose Files
 
-Clone the DRIVER-EU/CommonInformationSpace repository to your machine.
+In this directory you find the Testbed Docker Compose files that allow you to run the testbed on any machine that is [configured as a Docker host](https://docs.docker.com/engine/installation/).
 
-Make sure you have Docker and Docker-Compose installed:
- * On Windows: https://docs.docker.com/docker-for-windows/
- * On Mac: https://docs.docker.com/docker-for-mac/
- * On Linux: https://docs.docker.com/engine/installation/#server and https://docs.docker.com/compose/install/
+## Initializing a new Local Test Bed
 
-Run from the repository root directory:
-`docker-compose -f cis-beta.yml up -d`
+1. Navigate to the 'CommonInformationSpace/testbed/docker' directory
+2. Run from the console: `docker-compose -f testbed-local.yml up -d`
+3. Check if all the containers are running: `docker ps -a`
 
-Check whether all containers are running:
-`docker ps -a`
+## Starting/Stopping the Local Test Bed
 
-To stop the existing CIS development environment:
+* To stop, run from the console: `docker-compose -f testbed-local.yml stop`
+* To start, run from the console: `docker-compose -f testbed-local.yml start`
 
-`docker-compose -f cis-beta.yml stop`
+##  Stop and Remove the Local Test Bed
 
-To start the existing CIS development environment:
+* To stop and remove, run from the console: `docker-compose -f testbed-local.yml down`
 
-`docker-compose -f cis-beta.yml start`
+This command removes all containers and thus data and configuration that was present in the testbed.
 
-To shut down and remove the CIS development environment:
-`docker-compose -f cis-beta.yml down`
+# Configuring your Hosts File
 
-# Available Services
+If order to allow using the services provided by the testbed, several entries need to be [added to your hosts file](https://www.howtogeek.com/howto/27350/beginner-geek-how-to-edit-your-hosts-file/).
+
+## Hosts Entires for Local Test Bed
+
+```
+127.0.0.1	broker
+127.0.0.1	zookeeper
+127.0.0.1 kafka_rest
+127.0.0.1	schema_registry
+127.0.0.1	connect
+```
+
+# Available Testbed Services
+
+Note: in order to use these services make sure you have added the above entries to your hosts file!
 
 ## Zookeeper
 
-The Zookeeper instance is running and available at localhost:32181
+The Zookeeper instance is running and available at `localhost:3500`
 
 ## Kafka Broker
 
-A single Kafka Broker is running and available at PLAINTEXT://localhost:9092
+A single Kafka Broker is running and available at `PLAINTEXT://broker:9092`
 
 ## Schema Registry
 
-The [Kafka Schema Registry](https://docs.confluent.io/current/schema-registry/docs/index.html) is reachable at http://localhost:8081
+The [Kafka Schema Registry](https://docs.confluent.io/current/schema-registry/docs/index.html) is reachable at `http://schema_registry:3502` or `http://localhost:3502`
 
 ## Kafka Connect
 
-The [Kafka Connect](https://docs.confluent.io/current/connect/index.html) REST endpoint can be reached at http://localhost:8083
+The [Kafka Connect](https://docs.confluent.io/current/connect/index.html) REST endpoint is reachable at `http://connect:3504` or `http://localhost:3504`.
 
 ## Kafka REST Proxy
 
-The [Kafka REST Proxy](https://docs.confluent.io/current/kafka-rest/docs/index.html) can be reached at http://localhost:8082
+The [Kafka REST Proxy](https://docs.confluent.io/current/kafka-rest/docs/index.html) can be reached at `http://kafka_rest:8082` or `http://localhost:8082`.
 
 ## Kafka Topics UI
 
-A web interface that allows you to browse and search the topics that are available on the Kafka cluster is available at http://localhost:8000
+A web interface that allows you to browse and search the topics that are available on the Kafka cluster is available at `http://localhost:3600`.
 
 ## Kafka Schema Registry UI
 
-A web interface that allows inspection and creation of AVRO schemas in the schema regisrty is available at http://localhost:8001
+A web interface that allows inspection and creation of AVRO schemas in the schema regisrty is available at `http://localhost:3601'.
 
 ## Kafka Connect UI
 
-A web interface that allows inspection and creation of Kafka Connectors (data sinks and sources) is available at http://localhost:8002
+A web interface that allows inspection and creation of Kafka Connectors (data sinks and sources) is available at `http://localhost:3602`.
