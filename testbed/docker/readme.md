@@ -28,7 +28,7 @@ If order to allow using the services provided by the testbed, several entries ne
 ```
 127.0.0.1	broker
 127.0.0.1	zookeeper
-127.0.0.1 kafka_rest
+127.0.0.1   kafka_rest
 127.0.0.1	schema_registry
 127.0.0.1	connect
 ```
