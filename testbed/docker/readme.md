@@ -51,7 +51,7 @@ The [Kafka Schema Registry](https://docs.confluent.io/current/schema-registry/do
 
 ## Kafka Connect
 
-The [Kafka Connect](https://docs.confluent.io/current/connect/index.html) REST endpoint is reachable at http://connect:3504 or `http://localhost:3504`.
+The [Kafka Connect](https://docs.confluent.io/current/connect/index.html) REST endpoint is reachable at http://connect:3504 or http://localhost:3504.
 
 ## Kafka REST Proxy
 
