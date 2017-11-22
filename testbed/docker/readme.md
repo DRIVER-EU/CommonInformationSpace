@@ -23,7 +23,7 @@ This command removes all containers and thus data and configuration that was pre
 
 If order to allow using the services provided by the testbed, several entries need to be [added to your hosts file](https://www.howtogeek.com/howto/27350/beginner-geek-how-to-edit-your-hosts-file/).
 
-## Hosts Entires for Local Test Bed
+## Hosts Entries for Local Test Bed
 
 ```
 127.0.0.1	    broker
@@ -31,6 +31,15 @@ If order to allow using the services provided by the testbed, several entries ne
 127.0.0.1     kafka_rest
 127.0.0.1	    schema_registry
 127.0.0.1	    connect
+```
+## Hosts Entries for the Testbed at TNO
+
+```
+134.221.20.240	    broker
+134.221.20.240	    zookeeper
+134.221.20.240     kafka_rest
+134.221.20.240	    schema_registry
+134.221.20.240	    connect
 ```
 
 # Available Testbed Services
