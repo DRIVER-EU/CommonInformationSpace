@@ -40,7 +40,7 @@ As parameters you have to specify msgType (one of: CAP, EMSI, KML, KMZ, WMS, WFS
 
 ### Connector Java Examples
 
-Two basic examples on how to use the Connector are available:
+Two basic examples on how to use the Connector are available. Both examples are Mavne projects that can be run directly from any Java IDE. For example in Eclipse: import -> maven -> existing maven project.
 
 * Using Deep Integration: https://github.com/DRIVER-EU/test-bed-adapter/tree/master/examples/java/cis-adapter-test/test-deep-integration-adapter
 This example introduces a dependency on the connector and the CIS Core directly from your application.
