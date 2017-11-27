@@ -63,7 +63,8 @@ dependencies {
     implCompile 'commons-lang:commons-lang:2.6'
     implCompile ('org.springframework.boot:spring-boot-starter-web') {
     	exclude module: 'log4j-over-slf4j'
-    	}
+    	exclude module: 'logback-classic'
+    }
     implCompile 'com.frequentis.cis.adapter:CISCore:2.0'
     implCompile 'com.frequentis.cis.adapter:CISConnectorTemplate:2.0'
     implCompile 'io.springfox:springfox-swagger-ui:2.2.2'
@@ -79,7 +80,8 @@ dependencies {
     
     compile ('org.springframework.boot:spring-boot-starter-web') {
     	exclude module: 'log4j-over-slf4j'
-    	}
+    	exclude module: 'logback-classic'
+    }
     compile 'com.frequentis.cis.adapter:CISCore:2.0'
     compile 'com.frequentis.cis.adapter:CISConnectorTemplate:2.0'
     compile 'org.springframework.data:spring-data-rest-webmvc'
