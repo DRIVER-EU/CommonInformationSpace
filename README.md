@@ -3,7 +3,7 @@ The DRIVER+ adapter for the Common Information Space.
 
 # How to install the CIS Core to the local Repository:
 
-1. Check out the repository.
+1. Clone the Git repository `git clone https://github.com/DRIVER-EU/CommonInformationSpace.git` or use your Git Client UI.
 2. Ensure you have maven on your computer and in the path. If not, you can download this from [here](https://maven.apache.org/download.cgi).
 3. Execute the bat script 'mvnInstalls.bat' at `adaptor/maven/dependencies/`. 
 
