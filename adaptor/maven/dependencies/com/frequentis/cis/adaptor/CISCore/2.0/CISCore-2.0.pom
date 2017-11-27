@@ -44,7 +44,7 @@
     </dependency>
     <dependency>
       <groupId>org.apache.kafka</groupId>
-      <artifactId>kafka_2.12</artifactId>
+      <artifactId>kafka_2.11</artifactId>
       <version>1.0.0</version>
       <scope>compile</scope>
     </dependency>
