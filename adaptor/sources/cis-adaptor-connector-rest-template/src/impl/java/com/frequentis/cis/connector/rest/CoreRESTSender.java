@@ -40,13 +40,13 @@ public class CoreRESTSender {
 				CISXMLContent xmlPayload = (CISXMLContent)msg;
 				XMLContentNotify xmlNotify = new XMLContentNotify(msgType, xmlPayload, deParameters, dontEnvelope);
 				
-				response = postHTTPRequest(coreEndpointUrl + "/core/CISCore/sendXMLMessage","application/json",mapper.writeValueAsString(xmlNotify));
+				response = postHTTPRequest(coreEndpointUrl + "/CISCore/sendXMLMessage","application/json",mapper.writeValueAsString(xmlNotify));
 				
 			} else if (msg instanceof CISOtherContent) {
 				CISOtherContent otherPayload = (CISOtherContent)msg;
 				OtherContentNotify otherNotify = new OtherContentNotify(msgType, otherPayload, deParameters, dontEnvelope);
 				
-				response = postHTTPRequest(coreEndpointUrl + "/core/CISCore/sendOtherMessage","application/json",mapper.writeValueAsString(otherNotify));
+				response = postHTTPRequest(coreEndpointUrl + "/CISCore/sendOtherMessage","application/json",mapper.writeValueAsString(otherNotify));
 			}
 		} catch (JsonProcessingException e1) {
 			log.error("Error parsing Notify Information!", e1);
