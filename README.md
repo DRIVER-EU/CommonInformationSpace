@@ -10,7 +10,7 @@ The DRIVER+ adapter for the Common Information Space.
 Check your local maven repository (default `<userdir>/.m2/repository`) if the files were installed.
 
 ## Adaptor templates
-### what and how to do the CIS implementation.
+### What and how to do the CIS implementation.
 
 1. The current ConnectorTemplate is able to send and receive CAP, EMSI, WMS, WFS, KML, KMZ and MLP if you just need one of them, you don't have to do anything else, just use the template
 2. If you need an adaptation of e.g. CAP handling (translation from app object structure to CAP) I would propose to copy this and rename it to any other project name, as the template will be updated, and to avoid overwriting your implementation
@@ -34,11 +34,22 @@ That’s everything you have to do, the rest is done already ;-)
 
 Depending on your application, you could add the connector and core library directly to your application (deep integration), and use directly the java interfaces (implementation). If this is not possible, then you have to use the standalone application. This exposed a REST IF to which you can POST the messages.
 To send a message to the StandaloneApplication you have to run it (e.g. directly in eclipse as java application).
+
 The REST endpoint is reachable via the POST to http://localhost:8090/notify
 As parameters you have to specify msgType (one of: CAP, EMSI, KML, KMZ, WMS, WFS, MLP) and msg (the message itself (cap xml, kml xml, WFS uri, WMS uri, MLP string...)
+
+### Connector Java Examples
+
+Two basic examples on how to use the Connector are available:
+
+* Using Deep Integration: https://github.com/DRIVER-EU/test-bed-adapter/tree/master/examples/java/cis-adapter-test/test-deep-integration-adapter
+This example introduces a dependency on the connector and the CIS Core directly from your application.
+
+* Using the REST endpoint of the CIS Core Standalone Adaptor: https://github.com/DRIVER-EU/test-bed-adapter/tree/master/examples/java/cis-adapter-test/test-rest-adapter
+This example requires you to run the CIS Core Standalone Adaptor as well: https://github.com/DRIVER-EU/CommonInformationSpace/tree/master/adaptor/executables/CISCoreStandalone to expose the REST endpoint.
 
 ## Adaptor standalone
 see: HowTo.docx
 
 ### Testing
-The adaptor provides a Swagger-UI. You can all this with: http://localhost:80/core/swagger-ui.html on that you can test the functionality and basic communication configuration.
+The adaptor provides a Swagger-UI. You can all this with: http://localhost:8180/swagger-ui.html on that you can test the functionality and basic communication configuration.
